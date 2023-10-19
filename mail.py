@@ -29,7 +29,7 @@ def send_mail(settings, partner_list):
             email_0 = pair[0]["mail"]
             name_1 = pair[1]["name"]
             print(email_0)
-            if not settings['ask_before_send'] or input('Send mail type Y: ') == 'Y':
+            if not settings['mail']['ask_before_send'] or input('Send mail type Y: ') == 'Y':
                 body = """{} dein Wichtelpartner lautet: {}.\n
                         Das Geschenk sollte einen Wert von min {} Euro haben.\n
                         Dies ist eine automatisch generierte E-Mail. Sollte ein 
@@ -37,11 +37,11 @@ def send_mail(settings, partner_list):
 
                 msg = MIMEText(body.encode("latin-1"), _charset="latin-1")
                 msg['Subject'] = "Wichtelpartner für: {}".format(name_0.upper())
-                msg['From'] = username
+                msg['From'] = settings['mail']['username']
                 msg['To'] = email_0
                 server.ehlo()
                 try:
-                    server.sendmail(username, email_0, msg.as_string())
+                    server.sendmail(settings['mail']['username'], email_0, msg.as_string())
                     print("Mail sent to {}".format(email_0))
                 except:
                     print("An error occoured while sending the mail. Contact {} ({}) and send him the partner manually.".format(name_0, email_0))
@@ -52,6 +52,9 @@ if __name__ == "__main__":
         with open(SETTINGS_FILE, 'r') as file:
             settings = json.load(file)
             if os.path.isfile(settings["output"]):
-                    send_mail(settings, partner_list)
+                with open(settings["output"], 'r') as pair_list:
+                    send_mail(settings, json.load(pair_list))
+            else:
+                print("Generate pairs file first.")
     else:
         print("Settings file not found.")

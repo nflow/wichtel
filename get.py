@@ -24,8 +24,8 @@ if __name__ == "__main__":
         with open(SETTINGS_FILE, 'r') as file:
             settings = json.load(file)
         if settings["output"] != None and os.path.isfile(settings["output"]):
-            with open(settings["output"], 'r') as file:
-                partner_list = json.load(file)
+            with open(settings["output"], 'r') as pair_list:
+                partner_list = json.load(pair_list)
                 while True:
                     user_input = input('Enter name or mail: ')
                     if user_input.strip() == '':
