@@ -1,0 +1,24 @@
+{
+    "budget": 50,
+    "member": [
+        {
+            "name": "Member 1",
+            "mail": "member1@mail.de"
+        },
+        {
+            "name": "Member 2",
+            "mail": "member2@mail.de"
+        },
+        {
+            "name": "Member 3",
+            "mail": "member3@mail.de"
+        }
+    ],
+    "mail": {
+        "smtp": "smtp.gmail.com:587",
+        "username": "mail@gmail.com",
+        "password": "password",
+        "ask_before_send": true
+    },
+    "output": "pairs.json"
+}
