@@ -6,7 +6,6 @@ import os.path
 import getopt
 from collections import deque
 from random import shuffle
-import smtplib
 import getpass
 
 SETTINGS_FILE = 'settings.json'
